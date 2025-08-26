@@ -14,7 +14,7 @@ class DisplayResultStreamlit:
         graph = self.graph
         user_message = self.user_message
         print(user_message)
-        if usecase =="Basic ChatBot":
+        if usecase =="Basic Chatbot":
                 for event in graph.stream({'messages':("user",user_message)}):
                     print(event.values())
                     for value in event.values():
@@ -23,20 +23,20 @@ class DisplayResultStreamlit:
                             st.write(user_message)
                         with st.chat_message("assistant"):
                             st.write(value["messages"].content)
-        
-        elif usecase =="Chatbot with Web":
-            # Prepare state and invoke the graph
+
+        elif usecase=="Chatbot With Web":
+             # Prepare state and invoke the graph
             initial_state = {"messages": [user_message]}
             res = graph.invoke(initial_state)
             for message in res['messages']:
-                if isinstance(message, HumanMessage):
+                if type(message) == HumanMessage:
                     with st.chat_message("user"):
                         st.write(message.content)
-                elif isinstance(message, ToolMessage):
+                elif type(message)==ToolMessage:
                     with st.chat_message("ai"):
                         st.write("Tool Call Start")
                         st.write(message.content)
                         st.write("Tool Call End")
-                elif isinstance(message, AIMessage) and message.content:
+                elif type(message)==AIMessage and message.content:
                     with st.chat_message("assistant"):
                         st.write(message.content)

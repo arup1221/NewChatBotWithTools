@@ -60,7 +60,7 @@ class GraphBuilder:
         """
         Sets up the graph for the selected use case.
         """
-        if usecase == "Basic ChatBot":
+        if usecase == "Basic Chatbot":
             self.basic_chatbot_build_graph()
         if usecase == "Chatbot With Web":
             self.chatbot_with_tools_build_graph()
